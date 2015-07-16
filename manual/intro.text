@@ -1,0 +1,12 @@
+[Mixture] provides standard mixins allowing to quickly prepare
+consistant programming interfaces.
+
+{!modules:
+  Mixture_Compare
+  Mixture_Format
+  Mixture_Parse
+  Mixture_Monad
+  Mixture_FoldRight
+  Mixture_FoldAssoc
+  Mixture_NumericalFunction
+}

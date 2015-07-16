@@ -1,0 +1,5 @@
+name="mixture"
+version="@VERSION@"
+description="Mixins library"
+archive(byte) = "mixture.cma"
+archive(native) = "mixture.cmxa"
