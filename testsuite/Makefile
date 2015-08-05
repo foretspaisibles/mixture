@@ -1,4 +1,4 @@
-### Makefile -- Mixins
+### Makefile -- Test suite
 
 # Mixture (https://github.com/michipili/mixture)
 # This file is part of Mixture
@@ -11,17 +11,19 @@
 # are also available at
 # http://www.cecill.info/licences/Licence_CeCILL-B_V1-en.txt
 
-LIBRARY=		mixture
+PROGRAM=		unit-testing
 
-SRCS+=			mixture_Format.ml
-SRCS+=			mixture_Parse.ml
-SRCS+=			mixture_Compare.ml
-SRCS+=			mixture_Applicative.ml
-SRCS+=			mixture_Monad.ml
-SRCS+=			mixture_FoldRight.ml
-SRCS+=			mixture_FoldAssoc.ml
-SRCS+=			mixture_NumericalFunction.ml
+SRCS+=			testApplicative.ml
+SRCS+=			main.ml
 
-.include "ocaml.lib.mk"
+OCAMLLFLAGS+=		-linkall
+
+do-test: build
+	./unit-testing
+
+do-install:
+	${NOP}
+
+.include "ocaml.prog.mk"
 
 ### End of file `Makefile'
