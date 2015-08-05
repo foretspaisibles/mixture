@@ -13,7 +13,8 @@
 
 PROGRAM=		unit-testing
 
-SRCS+=			testApplicative.ml
+SRCS=			testApplicative.ml
+SRCS+=			testMonad.ml
 SRCS+=			main.ml
 
 OCAMLLFLAGS+=		-linkall
