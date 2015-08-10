@@ -19,6 +19,11 @@ MODULE=			ocaml.lib:src
 MODULE+=		ocaml.meta:meta
 MODULE+=		ocaml.manual:manual
 
+SUBDIR=			testsuite
+
+EXTERNAL=		ocaml.findlib:broken
+
+
 CONFIGURE+=		Makefile.config.in
 
 .include "generic.project.mk"

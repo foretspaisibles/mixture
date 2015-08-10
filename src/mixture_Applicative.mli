@@ -1,4 +1,4 @@
-(* Mixture_Monad -- Monadic mixin
+(* Mixture_Applicative -- Applicative mixin
 
    Mixture (https://github.com/michipili/mixture)
    This file is part of Mixture
@@ -11,47 +11,37 @@
    are also available at
    http://www.cecill.info/licences/Licence_CeCILL-B_V1-en.txt *)
 
-(** Monad mixin. *)
+(** Applicative mixin.
+
+    Applicative is a functional programming structure popularised by
+    Conor McBride and Ross Paterson.  This structure is a bit weaker
+    than monads while being very close to them.
+
+    {b See Also}
+    {{:https://hackage.haskell.org/package/base-4.8.1.0/docs/Control-Applicative.html} Applicative structure in Haskell}. *)
 
 
-(** Input signature of the functor [Mixture_Monad.Make]. *)
+(** Input signature of the functor [Mixture_Applicative.Make]. *)
 module type Basis =
 sig
   type (+'a) t
-  (** The type of monads. *)
-
-  val bind : 'a t -> ('a -> 'b t) -> 'b t
-  (** [bind m f] bind [f] to the monad [m]. *)
+  (** The type of applicative structures. *)
 
   val return : 'a -> 'a t
-  (** [return a] embed the value [a] in the monad. *)
+  (** Lift a value. *)
 
+  val apply : ('a -> 'b) t -> 'a t -> 'b t
+  (** [apply f] sequence computations and combine their results with [f]. *)
 end
 
 (** Output signature of the functor [Mixture_Monad.Make]. *)
 module type Methods =
 sig
   type (+'a) t
-  (** The type of monads. *)
-
-  val apply : ('a -> 'b) t -> 'a t -> 'b t
-  (** [apply f] sequence computations and combine their results with [f]. *)
-
-  val join : ('a t) t -> 'a t
-  (** [join mm] bind [mm] to the identity, reducing the monad. *)
+  (** The type of applicative structures. *)
 
   val map : ('a -> 'b) -> 'a t -> 'b t
-  (** [map f] is the natural tranformation between monads,
-      induced by [f]. *)
-
-  val bind2 : 'a t -> 'b t -> ('a -> 'b -> 'c t) -> 'c t
-  (** Similar to [bind], but works on two arguments. *)
-
-  val bind3 : 'a t -> 'b t -> 'c t -> ('a -> 'b -> 'c -> 'd t) -> 'd t
-  (** Similar to [bind], but works on three arguments. *)
-
-  val bind4 : 'a t -> 'b t -> 'c t -> 'd t -> ('a -> 'b -> 'c -> 'd -> 'e t) -> 'e t
-  (** Similar to [bind], but works on four arguments. *)
+  (** [map f] is the function on computations deduced from [f]. *)
 
   val map2 : ('a -> 'b -> 'c) -> 'a t -> 'b t -> 'c t
   (** A version of [map] for binary functions. *)
@@ -67,7 +57,9 @@ sig
       transformation of a list of computations in the computation of a
       list. *)
 
-  module Infix : sig
+  (** Infix operators. *)
+  module Infix :
+  sig
     val ( <*> ) : ('a -> 'b) t -> 'a t -> 'b t
     (** A shorthand for [apply], the sequential application. *)
 
@@ -81,28 +73,15 @@ sig
     val ( >* ) : 'a t -> 'b t -> 'b t
     (** Sequence actions, discarding the value of the second
         argument. *)
-
-    val ( >>= ) : 'a t -> ('a -> 'b t) -> 'b t
-    (** [ m >>= f] is equivalent to [bind m f]. *)
-
-    val ( >> ) : 'a t -> (unit -> 'b t) -> 'b t
-    (** [m >> f] binds [m] to [f], a context function. *)
-
-    val ( >=> ) : ('a -> 'b t) -> ('b -> 'c t) -> ('a -> 'c t)
-    (** [g >=> f] is the (contravariant) monadic composition of [g]
-        followed by [f]. *)
-
-    val ( <=< ) : ('b -> 'c t) -> ('a -> 'b t) -> ('a -> 'c t)
-    (** [f <=< g] is the monadic composition of [g] followed by [f]. *)
+  end
 end
 
-end
-
-(** Functor implementing monadic methods based on a monadic definition. *)
+(** Functor implementing applicative methods based on an applicative
+    definition. *)
 module Make(B:Basis): Methods
   with type 'a t := 'a B.t
 
-(** Signature of monads. *)
+(** Signature of applicative structures. *)
 module type S =
 sig
   type (+'a) t
