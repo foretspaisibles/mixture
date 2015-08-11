@@ -11,7 +11,7 @@
 # are also available at
 # http://www.cecill.info/licences/Licence_CeCILL-B_V1-en.txt
 
-AC_INIT([src/Mixture_Compare.ml])
+AC_INIT([src/mixture_Compare.ml])
 AC_CONFIG_MACRO_DIR([Library/Autoconf])
 AC_NEED_OCAML
 AC_NEED_FINDLIB
