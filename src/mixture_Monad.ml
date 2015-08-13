@@ -152,3 +152,35 @@ sig
   include Basis with type 'a t := 'a t
   include Methods with type 'a t := 'a t
 end
+
+
+
+module Transformer =
+struct
+  module type MonadBasis = Basis
+  module type MonadS = S
+  module MonadMake = Make
+
+  module type S =
+  sig
+    include MonadS
+    type (+'a) u
+    val lift : 'a u -> 'a t
+  end
+
+  module Make(B:Basis)(M:Basis)(G:Basis with type 'a t = 'a B.t M.t) =
+  struct
+
+    module MethodsMonad =
+      MonadMake(G)
+
+    include G
+    include MethodsMonad
+
+    type 'a u =
+      'a M.t
+
+    let lift m =
+      M.bind m G.return
+  end
+end

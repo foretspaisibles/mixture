@@ -67,6 +67,18 @@ sig
       transformation of a list of computations in the computation of a
       list. *)
 
+  val ignore : 'a t -> unit t
+  (** Monadic ignore. *)
+
+  val filter : ('a -> bool t) -> 'a t list -> 'a list t
+  (** Filter a list of computations with the given monadic predicate. *)
+
+  val only_if : bool -> unit t -> unit t
+  (** [only_if flag m] returns [m] only if [flag] is [true]. *)
+
+  val unless : bool -> unit t -> unit t
+  (** [unless flag m] returns [m] only if [flag] is [false]. *)
+
   module Infix : sig
     val ( <*> ) : ('a -> 'b) t -> 'a t -> 'b t
     (** A shorthand for [apply], the sequential application. *)
@@ -108,4 +120,23 @@ sig
   type (+'a) t
   include Basis with type 'a t := 'a t
   include Methods with type 'a t := 'a t
+end
+
+
+(** Monad Transformers. *)
+module Transformer :
+sig
+  module type MonadBasis = Basis
+  module type MonadS = S
+  module type S =
+  sig
+    include MonadS
+    type (+'a) u
+    val lift : 'a u -> 'a t
+  end
+
+  (** Functor implementing monadic transformers. *)
+  module Make(B:Basis)(M:Basis)(G:Basis with type 'a t = 'a B.t M.t) : S
+    with type 'a t = 'a B.t M.t
+     and type 'a u = 'a M.t
 end
