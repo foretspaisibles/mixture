@@ -1,0 +1,57 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<link rel="stylesheet" href="style.css" type="text/css">
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+<link rel="Start" href="index.html">
+<link rel="previous" href="Mixture_FoldRight.html">
+<link rel="next" href="Mixture_NumericalFunction.html">
+<link rel="Up" href="index.html">
+<link title="Index of types" rel=Appendix href="index_types.html">
+<link title="Index of values" rel=Appendix href="index_values.html">
+<link title="Index of modules" rel=Appendix href="index_modules.html">
+<link title="Index of module types" rel=Appendix href="index_module_types.html">
+<link title="Mixture_Format" rel="Chapter" href="Mixture_Format.html">
+<link title="Mixture_Parse" rel="Chapter" href="Mixture_Parse.html">
+<link title="Mixture_Compare" rel="Chapter" href="Mixture_Compare.html">
+<link title="Mixture_Applicative" rel="Chapter" href="Mixture_Applicative.html">
+<link title="Mixture_Monad" rel="Chapter" href="Mixture_Monad.html">
+<link title="Mixture_FoldRight" rel="Chapter" href="Mixture_FoldRight.html">
+<link title="Mixture_FoldAssoc" rel="Chapter" href="Mixture_FoldAssoc.html">
+<link title="Mixture_NumericalFunction" rel="Chapter" href="Mixture_NumericalFunction.html"><title>The Mixture Mixins Library : Mixture_FoldAssoc</title>
+</head>
+<body>
+<div class="navbar"><a class="pre" href="Mixture_FoldRight.html" title="Mixture_FoldRight">Previous</a>
+&nbsp;<a class="up" href="index.html" title="Index">Up</a>
+&nbsp;<a class="post" href="Mixture_NumericalFunction.html" title="Mixture_NumericalFunction">Next</a>
+</div>
+<h1>Module <a href="type_Mixture_FoldAssoc.html">Mixture_FoldAssoc</a></h1>
+
+<pre><span class="keyword">module</span> Mixture_FoldAssoc: <code class="code">sig</code> <a href="Mixture_FoldAssoc.html">..</a> <code class="code">end</code></pre><div class="info module top">
+Foldable associative mixin.
+<p>
+
+    A foldable associative mixin is an associative container structure
+    that can be walked through, accumulating observation of bindings in a
+    state variable.  This operation is known as folding or reducing.<br>
+</div>
+<hr width="100%">
+
+<pre><span class="keyword">module type</span> <a href="Mixture_FoldAssoc.Basis.html">Basis</a> = <code class="code">sig</code> <a href="Mixture_FoldAssoc.Basis.html">..</a> <code class="code">end</code></pre><div class="info">
+Input signature of the functor <code class="code">Mixture_FoldAssoc.Make</code>.
+</div>
+
+<pre><span class="keyword">module type</span> <a href="Mixture_FoldAssoc.Methods.html">Methods</a> = <code class="code">sig</code> <a href="Mixture_FoldAssoc.Methods.html">..</a> <code class="code">end</code></pre><div class="info">
+Output signature of the functor <code class="code">Mixture_FoldAssoc.Make</code>.
+</div>
+
+<pre><span class="keyword">module</span> <a href="Mixture_FoldAssoc.Make.html">Make</a> <code class="code">(</code><code class="code">B</code><code class="code"> : </code><code class="type"><a href="Mixture_FoldAssoc.Basis.html">Basis</a></code><code class="code">) </code>: <code class="type"><a href="Mixture_FoldAssoc.Methods.html">Methods</a></code><code class="type"> 
+  with type 'a t := 'a B.t
+   and type key := B.key</code></pre><div class="info">
+Functor implementing foldable mixins based on a folding function.
+</div>
+
+<pre><span class="keyword">module type</span> <a href="Mixture_FoldAssoc.S.html">S</a> = <code class="code">sig</code> <a href="Mixture_FoldAssoc.S.html">..</a> <code class="code">end</code></pre><div class="info">
+Signature of foldable assoc mixins.
+</div>
+</body></html>

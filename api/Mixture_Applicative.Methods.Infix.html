@@ -1,0 +1,48 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<link rel="stylesheet" href="style.css" type="text/css">
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+<link rel="Start" href="index.html">
+<link rel="Up" href="Mixture_Applicative.Methods.html">
+<link title="Index of types" rel=Appendix href="index_types.html">
+<link title="Index of values" rel=Appendix href="index_values.html">
+<link title="Index of modules" rel=Appendix href="index_modules.html">
+<link title="Index of module types" rel=Appendix href="index_module_types.html">
+<link title="Mixture_Format" rel="Chapter" href="Mixture_Format.html">
+<link title="Mixture_Parse" rel="Chapter" href="Mixture_Parse.html">
+<link title="Mixture_Compare" rel="Chapter" href="Mixture_Compare.html">
+<link title="Mixture_Applicative" rel="Chapter" href="Mixture_Applicative.html">
+<link title="Mixture_Monad" rel="Chapter" href="Mixture_Monad.html">
+<link title="Mixture_FoldRight" rel="Chapter" href="Mixture_FoldRight.html">
+<link title="Mixture_FoldAssoc" rel="Chapter" href="Mixture_FoldAssoc.html">
+<link title="Mixture_NumericalFunction" rel="Chapter" href="Mixture_NumericalFunction.html"><title>The Mixture Mixins Library : Mixture_Applicative.Methods.Infix</title>
+</head>
+<body>
+<div class="navbar">&nbsp;<a class="up" href="Mixture_Applicative.Methods.html" title="Mixture_Applicative.Methods">Up</a>
+&nbsp;</div>
+<h1>Module <a href="type_Mixture_Applicative.Methods.Infix.html">Mixture_Applicative.Methods.Infix</a></h1>
+
+<pre><span class="keyword">module</span> Infix: <code class="code">sig</code> <a href="Mixture_Applicative.Methods.Infix.html">..</a> <code class="code">end</code></pre><div class="info module top">
+Infix operators.<br>
+</div>
+<hr width="100%">
+
+<pre><span id="VAL(<*>)"><span class="keyword">val</span> (&lt;*&gt;)</span> : <code class="type">('a -> 'b) <a href="Mixture_Applicative.Methods.html#TYPEt">Mixture_Applicative.Methods.t</a> -><br>       'a <a href="Mixture_Applicative.Methods.html#TYPEt">Mixture_Applicative.Methods.t</a> -> 'b <a href="Mixture_Applicative.Methods.html#TYPEt">Mixture_Applicative.Methods.t</a></code></pre><div class="info ">
+A shorthand for <code class="code">apply</code>, the sequential application.<br>
+</div>
+
+<pre><span id="VAL(<$>)"><span class="keyword">val</span> (&lt;$&gt;)</span> : <code class="type">('a -> 'b) -><br>       'a <a href="Mixture_Applicative.Methods.html#TYPEt">Mixture_Applicative.Methods.t</a> -> 'b <a href="Mixture_Applicative.Methods.html#TYPEt">Mixture_Applicative.Methods.t</a></code></pre><div class="info ">
+A shorthand for <code class="code">map</code>.<br>
+</div>
+
+<pre><span id="VAL( <* )"><span class="keyword">val</span> ( &lt;* )</span> : <code class="type">'a <a href="Mixture_Applicative.Methods.html#TYPEt">Mixture_Applicative.Methods.t</a> -><br>       'b <a href="Mixture_Applicative.Methods.html#TYPEt">Mixture_Applicative.Methods.t</a> -> 'a <a href="Mixture_Applicative.Methods.html#TYPEt">Mixture_Applicative.Methods.t</a></code></pre><div class="info ">
+Sequence actions, discarding the value of the first
+        argument.<br>
+</div>
+
+<pre><span id="VAL( >* )"><span class="keyword">val</span> ( &gt;* )</span> : <code class="type">'a <a href="Mixture_Applicative.Methods.html#TYPEt">Mixture_Applicative.Methods.t</a> -><br>       'b <a href="Mixture_Applicative.Methods.html#TYPEt">Mixture_Applicative.Methods.t</a> -> 'b <a href="Mixture_Applicative.Methods.html#TYPEt">Mixture_Applicative.Methods.t</a></code></pre><div class="info ">
+Sequence actions, discarding the value of the second
+        argument.<br>
+</div>
+</body></html>

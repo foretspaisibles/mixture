@@ -1,0 +1,49 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<link rel="stylesheet" href="style.css" type="text/css">
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+<link rel="Start" href="index.html">
+<link rel="next" href="Mixture_Parse.html">
+<link rel="Up" href="index.html">
+<link title="Index of types" rel=Appendix href="index_types.html">
+<link title="Index of values" rel=Appendix href="index_values.html">
+<link title="Index of modules" rel=Appendix href="index_modules.html">
+<link title="Index of module types" rel=Appendix href="index_module_types.html">
+<link title="Mixture_Format" rel="Chapter" href="Mixture_Format.html">
+<link title="Mixture_Parse" rel="Chapter" href="Mixture_Parse.html">
+<link title="Mixture_Compare" rel="Chapter" href="Mixture_Compare.html">
+<link title="Mixture_Applicative" rel="Chapter" href="Mixture_Applicative.html">
+<link title="Mixture_Monad" rel="Chapter" href="Mixture_Monad.html">
+<link title="Mixture_FoldRight" rel="Chapter" href="Mixture_FoldRight.html">
+<link title="Mixture_FoldAssoc" rel="Chapter" href="Mixture_FoldAssoc.html">
+<link title="Mixture_NumericalFunction" rel="Chapter" href="Mixture_NumericalFunction.html"><title>The Mixture Mixins Library : Mixture_Format</title>
+</head>
+<body>
+<div class="navbar">&nbsp;<a class="up" href="index.html" title="Index">Up</a>
+&nbsp;<a class="post" href="Mixture_Parse.html" title="Mixture_Parse">Next</a>
+</div>
+<h1>Module <a href="type_Mixture_Format.html">Mixture_Format</a></h1>
+
+<pre><span class="keyword">module</span> Mixture_Format: <code class="code">sig</code> <a href="Mixture_Format.html">..</a> <code class="code">end</code></pre><div class="info module top">
+Formatted mixin.<br>
+</div>
+<hr width="100%">
+
+<pre><span class="keyword">module type</span> <a href="Mixture_Format.Basis.html">Basis</a> = <code class="code">sig</code> <a href="Mixture_Format.Basis.html">..</a> <code class="code">end</code></pre><div class="info">
+Input signature of the functor <code class="code">Mixture_Format.Make</code>.
+</div>
+
+<pre><span class="keyword">module type</span> <a href="Mixture_Format.Methods.html">Methods</a> = <code class="code">sig</code> <a href="Mixture_Format.Methods.html">..</a> <code class="code">end</code></pre><div class="info">
+Output signature of the functor <code class="code">Mixture_Format.Make</code>.
+</div>
+
+<pre><span class="keyword">module</span> <a href="Mixture_Format.Make.html">Make</a> <code class="code">(</code><code class="code">B</code><code class="code"> : </code><code class="type"><a href="Mixture_Format.Basis.html">Basis</a></code><code class="code">) </code>: <code class="type"><a href="Mixture_Format.Methods.html">Methods</a></code><code class="type"> 
+  with type t := B.t</code></pre><div class="info">
+Functor implementing output mixins based on a format definition.
+</div>
+
+<pre><span class="keyword">module type</span> <a href="Mixture_Format.S.html">S</a> = <code class="code">sig</code> <a href="Mixture_Format.S.html">..</a> <code class="code">end</code></pre><div class="info">
+Signature of formatted mixins.
+</div>
+</body></html>
