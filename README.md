@@ -65,8 +65,16 @@ licence agreement, found in the [COPYING][licence-en] and
 
 ## Setup guide
 
+It is easy to install **Mixture** using **opam** and its *pinning*
+feature.  In a shell visiting the repository, say
+
+```console
+% opam pin add mixture .
+```
+
+It is also possible to install **Mixture** manually.
 The installation procedure is based on the portable build system
-[BSD Owl Scripts][bsdowl-home] based on BSD Make.
+[BSD Owl Scripts][bsdowl-home] written for BSD Make.
 
 1. Verify that prerequisites are installed:
    - BSD Make
