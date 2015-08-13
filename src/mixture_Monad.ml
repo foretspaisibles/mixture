@@ -32,6 +32,10 @@ sig
   val map3 : ('a -> 'b -> 'c -> 'd) -> 'a t -> 'b t -> 'c t -> 'd t
   val map4 : ('a -> 'b -> 'c -> 'd -> 'e) -> 'a t -> 'b t -> 'c t -> 'd t -> 'e t 
   val dist : 'a t list -> 'a list t
+  val ignore : 'a t -> unit t
+  val filter : ('a -> bool t) -> 'a t list -> 'a list t
+  val only_if : bool -> unit t -> unit t
+  val unless : bool -> unit t -> unit t
   module Infix : sig
     val ( <*> ) : ('a -> 'b) t -> 'a t -> 'b t
     val ( <$> ) : ('a -> 'b) -> 'a t -> 'b t
@@ -111,13 +115,35 @@ struct
   let bind4 m_a m_b m_c m_d f =
     Infix.(m_a >>= fun a -> m_b >>= fun b -> m_c >>= fun c -> m_d >>= (f a b c))
 
+  let _cons hd tl =
+    hd :: tl
+
   let rec dist =
-    let cons hd tl =
-      hd :: tl
-    in
     function
     | [] -> B.return []
-    | hd :: tl -> Infix.(cons <$> hd <*> (dist tl))
+    | hd :: tl -> Infix.(_cons <$> hd <*> (dist tl))
+
+  let ignore m =
+    Infix.(Pervasives.ignore <$> m)
+
+  let filter pred lst =
+    let rec loop m = function
+      | [] -> Infix.(List.rev <$> m)
+      | hd :: tl ->
+          Infix.(hd >>= pred >>= maybe_pack m hd tl)
+    and maybe_pack m hd tl flag =
+      if flag then
+        loop Infix.(_cons <$> hd <*> m) tl
+      else
+        loop m tl
+    in
+    loop (B.return []) lst
+
+  let only_if flag m =
+    if flag then m else (B.return ())
+
+  let unless flag m =
+    if flag then (B.return ()) else m
 end
 
 module type S =
