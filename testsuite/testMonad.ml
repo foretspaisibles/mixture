@@ -96,7 +96,7 @@ let assert_maybe_string id ?expected_failure f a b =
     id
     ?expected_failure
     ~printer:(Maybe.format Format.pp_print_string)
-    ~equal:( (=) )
+    ~equal:( = )
     f a b
 
 let assert_list_string id ?expected_failure f a b =
@@ -104,43 +104,45 @@ let assert_list_string id ?expected_failure f a b =
     id
     ?expected_failure
     ~printer:(List.format Format.pp_print_string)
-    ~equal:( (=) )
+    ~equal:( = )
     f a b
 
 let () =
-  suite "maybe" "Test the maybe monad" [
+  make_suite "monad" "Test all monad mixin features"
+  |: [
+    make_suite "maybe" "Test the maybe monad"
+    |@ [
 
-    assert_maybe_string "map"
-      (Maybe.map String.uppercase) (Some "a") (Some "A");
+      assert_maybe_string "map"
+        (Maybe.map String.uppercase) (Some "a") (Some "A");
 
-    assert_maybe_string "map_infix"
-      (Maybe.Infix.( <$> ) String.uppercase) (Some "a") (Some "A");
+      assert_maybe_string "map_infix"
+        (Maybe.Infix.( <$> ) String.uppercase) (Some "a") (Some "A");
 
-    assert_maybe_string "apply"
-      (Maybe.apply (Some(String.uppercase))) (Some "a") (Some "A");
+      assert_maybe_string "apply"
+        (Maybe.apply (Some(String.uppercase))) (Some "a") (Some "A");
 
-    assert_maybe_string "apply_infix"
-      (Maybe.Infix.( <*> ) (Some(String.uppercase))) (Some "a") (Some "A");
+      assert_maybe_string "apply_infix"
+        (Maybe.Infix.( <*> ) (Some(String.uppercase))) (Some "a") (Some "A");
 
-    assert_maybe_string "apply_left_1"
-      (Maybe.Infix.( <* ) None) (Some "b") None;
+      assert_maybe_string "apply_left_1"
+        (Maybe.Infix.( <* ) None) (Some "b") None;
 
-    assert_maybe_string "apply_left_2"
-      (Maybe.Infix.( <* ) (Some "a")) (Some "b") (Some "a");
+      assert_maybe_string "apply_left_2"
+        (Maybe.Infix.( <* ) (Some "a")) (Some "b") (Some "a");
 
-    assert_maybe_string "apply_right_1"
-      (Maybe.Infix.( >* ) None) (Some "b") None;
+      assert_maybe_string "apply_right_1"
+        (Maybe.Infix.( >* ) None) (Some "b") None;
 
-    assert_maybe_string "apply_right_2"
-      (Maybe.Infix.( >* ) (Some "a")) (Some "b") (Some "b");
-  ];
-  suite "list" "Test the list monad" [
-    assert_list_string "cartesian_product"
-      (List.bind2 ["1";"2";"3"] ["4";"5"])
-      (fun x y -> [Printf.sprintf "(%s, %s)" x y])
-      ["(1, 4)"; "(1, 5)"; "(2, 4)"; "(2, 5)"; "(3, 4)"; "(3, 5)"]
-  ];
-  package "monad" "Test all monad mixin features" [
-    "list";
-    "maybe";
+      assert_maybe_string "apply_right_2"
+        (Maybe.Infix.( >* ) (Some "a")) (Some "b") (Some "b");
+    ];
+    make_suite "list" "Test the list monad"
+    |@ [
+      assert_list_string "cartesian_product"
+        (List.bind2 ["1";"2";"3"] ["4";"5"])
+        (fun x y -> [Printf.sprintf "(%s, %s)" x y])
+        ["(1, 4)"; "(1, 5)"; "(2, 4)"; "(2, 5)"; "(3, 4)"; "(3, 5)"]
+    ];
   ]
+  |> register

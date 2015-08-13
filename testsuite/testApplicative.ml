@@ -68,12 +68,11 @@ let () =
     let open BooleanExpression in
     And(Or(Variable("a"), Not(Variable("b"))), Immediate(true))
   in
-  suite "boolean_expression" "Test boolean expressions" [
+  make_suite "applicative" "Test all applicative mixin features"
+  |@ [
     assert_true "1" (BooleanExpression.eval expr) [
       "a", true;
       "b", true;
     ]
-  ];
-  package "applicative" "Test all applicative mixin features" [
-    "boolean_expression";
   ]
+  |> register
