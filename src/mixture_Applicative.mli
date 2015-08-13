@@ -34,7 +34,7 @@ sig
   (** [apply f] sequence computations and combine their results with [f]. *)
 end
 
-(** Output signature of the functor [Mixture_Monad.Make]. *)
+(** Output signature of the functor [Mixture_Applicative.Make]. *)
 module type Methods =
 sig
   type (+'a) t
