@@ -1,0 +1,143 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Mixture by michipili</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/github-light.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Mixture</h1>
+        <p>A comprehensive mixins library for OCaml&#39;s module system.</p>
+
+        <p class="view"><a href="https://github.com/michipili/mixture">View the Project on GitHub <small>michipili/mixture</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/michipili/mixture/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/michipili/mixture/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/michipili/mixture">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>
+<a id="mixture-a-mixins-library-for-ocaml" class="anchor" href="#mixture-a-mixins-library-for-ocaml" aria-hidden="true"><span class="octicon octicon-link"></span></a>Mixture, a mixins library for OCaml</h1>
+
+<p>The <strong>Mixture</strong> project provides a comprehensive mixins library for
+the OCaml module system.</p>
+
+<p><a href="https://travis-ci.org/michipili/mixture?branch=master"><img src="https://travis-ci.org/michipili/mixture.svg?branch=master" alt="Build Status"></a></p>
+
+<h2>
+<a id="example-usage-of-mixins" class="anchor" href="#example-usage-of-mixins" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example usage of mixins</h2>
+
+<p>The <em>Mixture_Compare</em> module defines a mixin which derives all
+classical comparison operators (in prefix and infox form) from a
+<em>compare</em> function.  For instance</p>
+
+<div class="highlight highlight-ocaml"><pre><span class="pl-k">module</span> <span class="pl-en">PlayingCard</span> <span class="pl-k">=</span>
+<span class="pl-k">struct</span>
+  <span class="pl-k">type</span> <span class="pl-k">card </span>=
+  | <span class="pl-en">Card</span> <span class="pl-k">of</span> <span class="pl-k">regular</span>
+  | <span class="pl-en">Joker</span>
+  <span class="pl-k">and</span> <span class="pl-k">regular </span>= { <span class="pl-s1">suit</span> : <span class="pl-k">card_suit</span><span class="pl-k">;</span> <span class="pl-s1">name</span> : <span class="pl-k">card_name</span><span class="pl-k">;</span> }
+  <span class="pl-k">and</span> <span class="pl-k">card_suit </span>= <span class="pl-en">Heart</span> | <span class="pl-en">Club</span> | <span class="pl-en">Spade</span> | <span class="pl-en">Diamond</span>
+  <span class="pl-k">and</span> <span class="pl-k">card_name </span>=  <span class="pl-en">Ace</span> | <span class="pl-en">King</span> | <span class="pl-en">Queen</span> | <span class="pl-en">Jack</span> | <span class="pl-en">Simple</span> <span class="pl-k">of</span> <span class="pl-k">int</span>
+
+  <span class="pl-k">module</span> <span class="pl-en">Basis</span> <span class="pl-k">=</span>
+  <span class="pl-k">struct</span>
+    <span class="pl-k">type</span> <span class="pl-k">t </span>= <span class="pl-k">card</span>
+    <span class="pl-k">let</span> compare <span class="pl-k">=</span> <span class="pl-c1">Pervasives.</span>compare
+  <span class="pl-k">end</span>
+
+  <span class="pl-k">module</span> <span class="pl-en">CompareMethods</span> <span class="pl-k">=</span>
+    <span class="pl-c1">Mixture_Compare.</span><span class="pl-en">Make</span>(<span class="pl-en">Basis</span>)
+
+  <span class="pl-k">include</span> <span class="pl-en">Basis</span>
+  <span class="pl-k">include</span> <span class="pl-en">CompareMethods</span>
+<span class="pl-k">end</span></pre></div>
+
+<p>The module <em>PlayingCard</em> has prefix and infix comparison operators
+derived from <em>compare</em> so, if <em>a</em> and <em>b</em> are cards, one can write
+<code>PlayingCard.lt a b</code> or equivalently <code>PlayingCard.Infix.(a &lt; b)</code>.</p>
+
+<h2>
+<a id="provided-mixins" class="anchor" href="#provided-mixins" aria-hidden="true"><span class="octicon octicon-link"></span></a>Provided mixins</h2>
+
+<p>The growing list of mixins defined in the library is:</p>
+
+<ul>
+<li><em>Mixture_Applicative</em></li>
+<li><em>Mixture_Compare</em></li>
+<li><em>Mixture_Format</em></li>
+<li><em>Mixture_Parse</em></li>
+<li><em>Mixture_Monad</em></li>
+<li><em>Mixture_FoldRight</em></li>
+<li><em>Mixture_FoldAssoc</em></li>
+</ul>
+
+<h2>
+<a id="free-software" class="anchor" href="#free-software" aria-hidden="true"><span class="octicon octicon-link"></span></a>Free software</h2>
+
+<p>It is written by Michael Grünewald and is distributed as a free
+software: copying it  and redistributing it is
+very much welcome under conditions of the <a href="http://www.cecill.info/licences/Licence_CeCILL-B_V1-en.html">CeCILL-B</a>
+licence agreement, found in the <a href="COPYING">COPYING</a> and
+<a href="COPYING-FR">COPYING-FR</a> files of the distribution.</p>
+
+<h2>
+<a id="setup-guide" class="anchor" href="#setup-guide" aria-hidden="true"><span class="octicon octicon-link"></span></a>Setup guide</h2>
+
+<p>The installation procedure is based on the portable build system
+<a href="https://github.com/michipili/bsdowl">BSD Owl Scripts</a> based on BSD Make.</p>
+
+<ol>
+<li>
+<p>Verify that prerequisites are installed:</p>
+
+<ul>
+<li>BSD Make</li>
+<li><a href="https://github.com/michipili/bsdowl/wiki/Install">BSD OWl</a></li>
+<li>OCaml</li>
+<li><a href="https://github.com/michipili/broken">Broken</a></li>
+<li>GNU Autoconf</li>
+</ul>
+</li>
+<li><p>Get the source, either by cloning the repository or by exploding a
+<a href="releases">distribution tarball</a>.</p></li>
+<li><p>Optionally run <code>autoconf</code> to produce a configuration script. This
+is only required if the script is not already present.</p></li>
+<li><p>Run <code>./configure</code>, you can choose the installation prefix with
+<code>--prefix</code>.</p></li>
+<li><p>Run <code>make build</code>.</p></li>
+<li><p>Optionally run <code>make test</code> to test your build.</p></li>
+<li><p>Finally run <code>make install</code>.</p></li>
+</ol>
+
+<p>Depending on how <strong>BSD Make</strong> is called on your system, you may need to
+replace <code>make</code> by <code>bsdmake</code> or <code>bmake</code> in steps 5, 6, and 7.
+The <strong>GNU Make</strong> program usually give up the ghost, croaking
+<code>*** missing separator. Stop.</code> when you mistakingly use it instead of
+<strong>BSD Make</strong>.</p>
+
+<p>Step 7 requires that you can <code>su -</code> if you are not already <code>root</code>.</p>
+
+<p>Michael Grünewald in Bonn, on August 11, 2015</p>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/michipili">michipili</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
