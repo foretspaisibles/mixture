@@ -22,8 +22,9 @@ remove: [
   ["rm" "-rf" "%{share}%/doc/mixture"]
 ]
 depends: [
-  "ocamlfind"
+  "broken"
   "bsdowl" {>= "3.0.0"}
+  "ocamlfind"
 ]
 depexts: [
   [["debian"] ["bmake"]]
