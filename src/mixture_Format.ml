@@ -14,7 +14,7 @@
 module type Basis =
 sig
   type t
-  val format : Format.formatter -> t -> unit
+  val pp_print : Format.formatter -> t -> unit
 end
 
 module type Methods =
@@ -23,6 +23,7 @@ sig
   val to_string : t -> string
   val output : out_channel -> t -> unit
   val print : t -> unit
+  val prerr : t -> unit
 end
 
 module Make(B:Basis) =
@@ -32,7 +33,7 @@ struct
 
   let to_string a =
     begin
-      format str_formatter a;
+      pp_print str_formatter a;
       flush_str_formatter()
     end
 
@@ -42,6 +43,8 @@ struct
   let print a =
     output stdout a
 
+  let prerr a =
+    output stderr a
 end
 
 module type S =
