@@ -20,8 +20,8 @@ sig
   type t
   (** The type of formatted elements. *)
 
-  val format : Format.formatter -> t -> unit
-  (** [format fft a] pretty prints [a] on [fft]. *)
+  val pp_print : Format.formatter -> t -> unit
+  (** [pp_print fft a] pretty print [a] on [fft]. *)
 
 end
 
@@ -39,6 +39,8 @@ sig
   val print : t -> unit
   (** Output on the standard output channel. *)
 
+  val prerr : t -> unit
+  (** Output on the standard error channel. *)
 end
 
 (** Functor implementing output mixins based on a format definition. *)
