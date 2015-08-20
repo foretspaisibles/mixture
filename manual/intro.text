@@ -2,6 +2,7 @@
 consistant programming interfaces.
 
 {!modules:
+  Mixture_Applicative
   Mixture_Compare
   Mixture_Format
   Mixture_Parse
@@ -10,3 +11,10 @@ consistant programming interfaces.
   Mixture_FoldAssoc
   Mixture_NumericalFunction
 }
+
+This project is {i free software} released under the
+{{:http://www.cecill.info/licences/Licence_CeCILL-B_V1-en.html}CeCILL-B}
+licence.  The project is hosted on
+{{:https://github.com/michipili/mixture}GitHub}, please report any
+issue on the
+{{:https://github.com/michipili/mixture/issues}issue tracker} there.

@@ -1,4 +1,4 @@
-### Makefile -- Project Mixture
+### Makefile -- Test suite
 
 # Mixture (https://github.com/michipili/mixture)
 # This file is part of Mixture
@@ -11,21 +11,20 @@
 # are also available at
 # http://www.cecill.info/licences/Licence_CeCILL-B_V1-en.txt
 
-PACKAGE=		mixture
-VERSION=		0.2.0
-OFFICER=		michipili@gmail.com
+PROGRAM=		unit-testing
 
-MODULE=			ocaml.lib:src
-MODULE+=		ocaml.meta:meta
-MODULE+=		ocaml.manual:manual
+SRCS=			testApplicative.ml
+SRCS+=			testMonad.ml
+SRCS+=			main.ml
 
-SUBDIR=			testsuite
+OCAMLLFLAGS+=		-linkall
 
-EXTERNAL=		ocaml.findlib:broken
+do-test: build
+	./unit-testing
 
+do-install:
+	${NOP}
 
-CONFIGURE+=		Makefile.config.in
-
-.include "generic.project.mk"
+.include "ocaml.prog.mk"
 
 ### End of file `Makefile'

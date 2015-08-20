@@ -1,9 +1,11 @@
-### Makefile -- Project Mixture
+#!/bin/sh
+
+### travisci -- Continuous integration test for travis
 
 # Mixture (https://github.com/michipili/mixture)
 # This file is part of Mixture
 #
-# Copyright © 2013–2015 Michael Grünewald
+# Copyright © 2015 Michael Grünewald
 #
 # This file must be used under the terms of the CeCILL-B.
 # This source file is licensed as described in the file COPYING, which
@@ -11,21 +13,11 @@
 # are also available at
 # http://www.cecill.info/licences/Licence_CeCILL-B_V1-en.txt
 
-PACKAGE=		mixture
-VERSION=		0.2.0
-OFFICER=		michipili@gmail.com
+INSTALL_PREFIX="${HOME}/.local"
 
-MODULE=			ocaml.lib:src
-MODULE+=		ocaml.meta:meta
-MODULE+=		ocaml.manual:manual
+eval $(opam config env)
+autoconf
+./configure --prefix="${INSTALL_PREFIX}"
+bmake -I "${INSTALL_PREFIX}/share/bsdowl" all
 
-SUBDIR=			testsuite
-
-EXTERNAL=		ocaml.findlib:broken
-
-
-CONFIGURE+=		Makefile.config.in
-
-.include "generic.project.mk"
-
-### End of file `Makefile'
+### End of file `travisci'

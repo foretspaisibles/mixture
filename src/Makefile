@@ -16,6 +16,7 @@ LIBRARY=		mixture
 SRCS+=			mixture_Format.ml
 SRCS+=			mixture_Parse.ml
 SRCS+=			mixture_Compare.ml
+SRCS+=			mixture_Applicative.ml
 SRCS+=			mixture_Monad.ml
 SRCS+=			mixture_FoldRight.ml
 SRCS+=			mixture_FoldAssoc.ml

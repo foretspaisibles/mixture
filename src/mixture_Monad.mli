@@ -11,22 +11,7 @@
    are also available at
    http://www.cecill.info/licences/Licence_CeCILL-B_V1-en.txt *)
 
-(** Monadic mixin.
-
-    This mixin describes monads in OCaml following the indications given by
-    “A Monad Tutorial for OCaml.”
-
-    A monad over type ['a] is an embedding of ['a] in a larger type ['a
-    t].  It can be thought of as the type of outcomes for computations
-    producing values of type ['a].  Operations on monads can often be
-    interepreted in terms of categorical diagrams you can draw given the
-    embedding ['a -> 'a t] or the identity of ['a t], for instance fibred
-    products.
-
-    {b References:}
-
-    {{:http://blog.enfranchisedmind.com/2007/08/a-monad-tutorial-for-ocaml/}
-    A Monad Tutorial for Ocaml}. *)
+(** Monad mixin. *)
 
 
 (** Input signature of the functor [Mixture_Monad.Make]. *)
@@ -49,6 +34,9 @@ sig
   type (+'a) t
   (** The type of monads. *)
 
+  val apply : ('a -> 'b) t -> 'a t -> 'b t
+  (** [apply f] sequence computations and combine their results with [f]. *)
+
   val join : ('a t) t -> 'a t
   (** [join mm] bind [mm] to the identity, reducing the monad. *)
 
@@ -57,30 +45,98 @@ sig
       induced by [f]. *)
 
   val bind2 : 'a t -> 'b t -> ('a -> 'b -> 'c t) -> 'c t
-  (** [bind2 m_a m_b f] is similar to bind, but works on two
-      arguments.
+  (** Similar to [bind], but works on two arguments. *)
 
-      It has the effect of a fibered product. *)
+  val bind3 : 'a t -> 'b t -> 'c t -> ('a -> 'b -> 'c -> 'd t) -> 'd t
+  (** Similar to [bind], but works on three arguments. *)
+
+  val bind4 : 'a t -> 'b t -> 'c t -> 'd t -> ('a -> 'b -> 'c -> 'd -> 'e t) -> 'e t
+  (** Similar to [bind], but works on four arguments. *)
+
+  val map2 : ('a -> 'b -> 'c) -> 'a t -> 'b t -> 'c t
+  (** A version of [map] for binary functions. *)
+
+  val map3 : ('a -> 'b -> 'c -> 'd) -> 'a t -> 'b t -> 'c t -> 'd t
+  (** A version of [map] for ternary functions. *)
+
+  val map4 : ('a -> 'b -> 'c -> 'd -> 'e) -> 'a t -> 'b t -> 'c t -> 'd t -> 'e t
+  (** A version of [map] for quaternary functions. *)
+
+  val dist : 'a t list -> 'a list t
+  (** The applicative distributor for list, that is, the natural
+      transformation of a list of computations in the computation of a
+      list. *)
+
+  val ignore : 'a t -> unit t
+  (** Monadic ignore. *)
+
+  val filter : ('a -> bool t) -> 'a t list -> 'a list t
+  (** Filter a list of computations with the given monadic predicate. *)
+
+  val only_if : bool -> unit t -> unit t
+  (** [only_if flag m] returns [m] only if [flag] is [true]. *)
+
+  val unless : bool -> unit t -> unit t
+  (** [unless flag m] returns [m] only if [flag] is [false]. *)
 
   module Infix : sig
+    val ( <*> ) : ('a -> 'b) t -> 'a t -> 'b t
+    (** A shorthand for [apply], the sequential application. *)
+
+    val ( <$> ) : ('a -> 'b) -> 'a t -> 'b t
+    (** A shorthand for [map]. *)
+
+    val ( <* ) : 'a t -> 'b t -> 'a t
+    (** Sequence actions, discarding the value of the first
+        argument. *)
+
+    val ( >* ) : 'a t -> 'b t -> 'b t
+    (** Sequence actions, discarding the value of the second
+        argument. *)
+
     val ( >>= ) : 'a t -> ('a -> 'b t) -> 'b t
     (** [ m >>= f] is equivalent to [bind m f]. *)
 
     val ( >> ) : 'a t -> (unit -> 'b t) -> 'b t
     (** [m >> f] binds [m] to [f], a context function. *)
 
-  end
+    val ( >=> ) : ('a -> 'b t) -> ('b -> 'c t) -> ('a -> 'c t)
+    (** [g >=> f] is the (contravariant) monadic composition of [g]
+        followed by [f]. *)
+
+    val ( <=< ) : ('b -> 'c t) -> ('a -> 'b t) -> ('a -> 'c t)
+    (** [f <=< g] is the monadic composition of [g] followed by [f]. *)
+end
 
 end
 
-(** Functor implementing monadic mixins based on a monadic definition. *)
+(** Functor implementing monadic methods based on a monadic definition. *)
 module Make(B:Basis): Methods
   with type 'a t := 'a B.t
 
-(** Signature of monadic mixins. *)
+(** Signature of monads. *)
 module type S =
 sig
   type (+'a) t
   include Basis with type 'a t := 'a t
   include Methods with type 'a t := 'a t
+end
+
+
+(** Monad Transformers. *)
+module Transformer :
+sig
+  module type MonadBasis = Basis
+  module type MonadS = S
+  module type S =
+  sig
+    include MonadS
+    type (+'a) u
+    val lift : 'a u -> 'a t
+  end
+
+  (** Functor implementing monadic transformers. *)
+  module Make(B:Basis)(M:Basis)(G:Basis with type 'a t = 'a B.t M.t) : S
+    with type 'a t = 'a B.t M.t
+     and type 'a u = 'a M.t
 end
