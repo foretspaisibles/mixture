@@ -23,7 +23,7 @@ remove: [
   ["rm" "-rf" "%{share}%/doc/mixture"]
 ]
 depends: [
-  "broken"
+  "broken" {>= "0.4.2"}
   "bsdowl" {>= "3.0.0"}
   "ocamlfind"
 ]
