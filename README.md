@@ -45,13 +45,13 @@ derived from *compare* so, if *a* and *b* are cards, one can write
 
 The growing list of mixins defined in the library is:
 
-- *Mixture_Applicative*
-- *Mixture_Compare*
-- *Mixture_Format*
-- *Mixture_Parse*
-- *Mixture_Monad*
-- *Mixture_FoldRight*
-- *Mixture_FoldAssoc*
+- **Mixture_Applicative**
+- **Mixture_Compare**
+- **Mixture_Format**
+- **Mixture_Parse**
+- **Mixture_Monad**
+- **Mixture_FoldRight**
+- **Mixture_FoldAssoc**
 
 
 ## Free software
@@ -69,6 +69,7 @@ It is easy to install **Mixture** using **opam** and its *pinning*
 feature.  In a shell visiting the repository, say
 
 ```console
+% autoconf
 % opam pin add mixture .
 ```
 
