@@ -15,6 +15,8 @@ open Broken
 
 module Stdlib_List = List
 
+let ( |> ) x f = f x (* Compatibility with OCaml 4.00.1 *)
+
 (* We implement several calssical monads. *)
 
 
