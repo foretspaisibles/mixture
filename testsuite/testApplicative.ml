@@ -10,8 +10,9 @@
    you should have received as part of this distribution. The terms
    are also available at
    http://www.cecill.info/licences/Licence_CeCILL-B_V1-en.txt *)
-
 open Broken
+
+let ( |> ) x f = f x (* Compatibility with OCaml 4.00.1 *)
 
 (* We implement Reader as an exmple of Applicative *)
 module Reader =
