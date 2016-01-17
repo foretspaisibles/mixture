@@ -47,6 +47,10 @@ Sequence actions, discarding the value of the second
 <code class="code"> m &gt;&gt;= f</code> is equivalent to <code class="code">bind m f</code>.<br>
 </div>
 
+<pre><span id="VAL(>|=)"><span class="keyword">val</span> (&gt;|=)</span> : <code class="type">'a <a href="Mixture_Monad.Methods.html#TYPEt">Mixture_Monad.Methods.t</a> -> ('a -> 'b) -> 'b <a href="Mixture_Monad.Methods.html#TYPEt">Mixture_Monad.Methods.t</a></code></pre><div class="info ">
+A composable shorthand for <code class="code">map</code>.<br>
+</div>
+
 <pre><span id="VAL(>>)"><span class="keyword">val</span> (&gt;&gt;)</span> : <code class="type">'a <a href="Mixture_Monad.Methods.html#TYPEt">Mixture_Monad.Methods.t</a> -><br>       (unit -> 'b <a href="Mixture_Monad.Methods.html#TYPEt">Mixture_Monad.Methods.t</a>) -> 'b <a href="Mixture_Monad.Methods.html#TYPEt">Mixture_Monad.Methods.t</a></code></pre><div class="info ">
 <code class="code">m &gt;&gt; f</code> binds <code class="code">m</code> to <code class="code">f</code>, a context function.<br>
 </div>

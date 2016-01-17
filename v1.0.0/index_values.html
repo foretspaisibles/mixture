@@ -117,6 +117,11 @@ A shorthand for <code class="code">apply</code>, the sequential application.
 <code class="code"> m &gt;&gt;= f</code> is equivalent to <code class="code">bind m f</code>.
 </div>
 </td></tr>
+<tr><td><a href="Mixture_Monad.Methods.Infix.html#VAL(>|=)">(&gt;|=)</a> [<a href="Mixture_Monad.Methods.Infix.html">Mixture_Monad.Methods.Infix</a>]</td>
+<td><div class="info">
+A composable shorthand for <code class="code">map</code>.
+</div>
+</td></tr>
 <tr><td align="left"><br>A</td></tr>
 <tr><td><a href="Mixture_Monad.Methods.html#VALapply">apply</a> [<a href="Mixture_Monad.Methods.html">Mixture_Monad.Methods</a>]</td>
 <td><div class="info">
@@ -163,6 +168,12 @@ Return the number of elements in the container.
 <tr><td><a href="Mixture_FoldRight.Methods.html#VALcardinal">cardinal</a> [<a href="Mixture_FoldRight.Methods.html">Mixture_FoldRight.Methods</a>]</td>
 <td><div class="info">
 Return the number of elements in the container.
+</div>
+</td></tr>
+<tr><td><a href="Mixture_Monad.Methods.html#VALcatch">catch</a> [<a href="Mixture_Monad.Methods.html">Mixture_Monad.Methods</a>]</td>
+<td><div class="info">
+<code class="code">catch f h</code> is a computation yielding the same result as <code class="code">f ()</code>
+      if this computation does not throw an exception.
 </div>
 </td></tr>
 <tr><td><a href="Mixture_Compare.Basis.html#VALcompare">compare</a> [<a href="Mixture_Compare.Basis.html">Mixture_Compare.Basis</a>]</td>
@@ -224,6 +235,11 @@ Return the elements of the container.
 </div>
 </td></tr>
 <tr><td align="left"><br>F</td></tr>
+<tr><td><a href="Mixture_Monad.Methods.html#VALfilter">filter</a> [<a href="Mixture_Monad.Methods.html">Mixture_Monad.Methods</a>]</td>
+<td><div class="info">
+Filter a list of computations with the given monadic predicate.
+</div>
+</td></tr>
 <tr><td><a href="Mixture_FoldAssoc.Basis.html#VALfold">fold</a> [<a href="Mixture_FoldAssoc.Basis.html">Mixture_FoldAssoc.Basis</a>]</td>
 <td><div class="info">
 <code class="code">fold f cont acc</code> apply <code class="code">f</code> on each binding of <code class="code">cont</code>,
@@ -259,11 +275,6 @@ Return the elements of the container.
 <code class="code">for_all p cont</code> is true iff each element of <code class="code">cont</code> satisfies <code class="code">p</code>.
 </div>
 </td></tr>
-<tr><td><a href="Mixture_Format.Basis.html#VALformat">format</a> [<a href="Mixture_Format.Basis.html">Mixture_Format.Basis</a>]</td>
-<td><div class="info">
-<code class="code">format fft a</code> pretty prints <code class="code">a</code> on <code class="code">fft</code>.
-</div>
-</td></tr>
 <tr><td align="left"><br>G</td></tr>
 <tr><td><a href="Mixture_Compare.Methods.html#VALge">ge</a> [<a href="Mixture_Compare.Methods.html">Mixture_Compare.Methods</a>]</td>
 <td><div class="info">
@@ -276,6 +287,11 @@ Return the elements of the container.
 </div>
 </td></tr>
 <tr><td align="left"><br>I</td></tr>
+<tr><td><a href="Mixture_Monad.Methods.html#VALignore">ignore</a> [<a href="Mixture_Monad.Methods.html">Mixture_Monad.Methods</a>]</td>
+<td><div class="info">
+Monadic ignore.
+</div>
+</td></tr>
 <tr><td><a href="Mixture_NumericalFunction.Methods.html#VALis_within_range">is_within_range</a> [<a href="Mixture_NumericalFunction.Methods.html">Mixture_NumericalFunction.Methods</a>]</td>
 <td><div class="info">
 Predicate recognising points lying in the range of
@@ -316,6 +332,8 @@ Folding without accumulation.
 <i>Lesser or equal to</i>.
 </div>
 </td></tr>
+<tr><td><a href="Mixture_Monad.Transformer.S.html#VALlift">lift</a> [<a href="Mixture_Monad.Transformer.S.html">Mixture_Monad.Transformer.S</a>]</td>
+<td></td></tr>
 <tr><td><a href="Mixture_Compare.Methods.html#VALlt">lt</a> [<a href="Mixture_Compare.Methods.html">Mixture_Compare.Methods</a>]</td>
 <td><div class="info">
 <i>Lesser than</i>.
@@ -385,6 +403,11 @@ The minimum of two comparable elements.
 Parse the given string.
 </div>
 </td></tr>
+<tr><td><a href="Mixture_Monad.Methods.html#VALonly_if">only_if</a> [<a href="Mixture_Monad.Methods.html">Mixture_Monad.Methods</a>]</td>
+<td><div class="info">
+<code class="code">only_if flag m</code> returns <code class="code">m</code> only if <code class="code">flag</code> is <code class="code">true</code>.
+</div>
+</td></tr>
 <tr><td><a href="Mixture_Format.Methods.html#VALoutput">output</a> [<a href="Mixture_Format.Methods.html">Mixture_Format.Methods</a>]</td>
 <td><div class="info">
 Output on the given output channel.
@@ -399,6 +422,16 @@ Parse a value of the given type.
 <tr><td><a href="Mixture_Parse.Basis.html#VALpath">path</a> [<a href="Mixture_Parse.Basis.html">Mixture_Parse.Basis</a>]</td>
 <td><div class="info">
 The current module path, as a string.
+</div>
+</td></tr>
+<tr><td><a href="Mixture_Format.Basis.html#VALpp_print">pp_print</a> [<a href="Mixture_Format.Basis.html">Mixture_Format.Basis</a>]</td>
+<td><div class="info">
+<code class="code">pp_print fft a</code> pretty print <code class="code">a</code> on <code class="code">fft</code>.
+</div>
+</td></tr>
+<tr><td><a href="Mixture_Format.Methods.html#VALprerr">prerr</a> [<a href="Mixture_Format.Methods.html">Mixture_Format.Methods</a>]</td>
+<td><div class="info">
+Output on the standard error channel.
 </div>
 </td></tr>
 <tr><td><a href="Mixture_Format.Methods.html#VALprint">print</a> [<a href="Mixture_Format.Methods.html">Mixture_Format.Methods</a>]</td>
@@ -438,6 +471,12 @@ Lift a value.
 <tr><td><a href="Mixture_Format.Methods.html#VALto_string">to_string</a> [<a href="Mixture_Format.Methods.html">Mixture_Format.Methods</a>]</td>
 <td><div class="info">
 Convert to string.
+</div>
+</td></tr>
+<tr><td align="left"><br>U</td></tr>
+<tr><td><a href="Mixture_Monad.Methods.html#VALunless">unless</a> [<a href="Mixture_Monad.Methods.html">Mixture_Monad.Methods</a>]</td>
+<td><div class="info">
+<code class="code">unless flag m</code> returns <code class="code">m</code> only if <code class="code">flag</code> is <code class="code">false</code>.
 </div>
 </td></tr>
 </table>
