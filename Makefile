@@ -23,6 +23,8 @@ SUBDIR=			testsuite
 
 EXTERNAL=		ocaml.findlib:broken
 
+DISTEXCLUDE=		.merlin
+DISTEXCLUDE+=		.ocamlinit
 
 CONFIGURE+=		Makefile.config.in
 
