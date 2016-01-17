@@ -12,7 +12,7 @@
 # http://www.cecill.info/licences/Licence_CeCILL-B_V1-en.txt
 
 PACKAGE=		mixture
-VERSION=		0.2.1-current
+VERSION=		1.0.0-current
 OFFICER=		michipili@gmail.com
 
 MODULE=			ocaml.lib:src
