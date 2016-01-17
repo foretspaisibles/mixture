@@ -1,5 +1,5 @@
 opam-version: "1.2"
-version: "0.2.1"
+version: "1.0.0"
 maintainer: "michipili@gmail.com"
 authors: "Michael Grünewald"
 license: "CeCILL-B"
@@ -23,7 +23,7 @@ remove: [
   ["rm" "-rf" "%{share}%/doc/mixture"]
 ]
 available: [
-  ocaml-version >= "4.01.0"
+  ocaml-version >= "4.00.1"
 ]
 depends: [
   "broken" {>= "0.4.2"}

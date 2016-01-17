@@ -8,3 +8,8 @@ configure
 Makefile.config
 Makefile.local
 .product
+#
+# OCaml artefacts
+#
+.merlin
+.ocamlinit
